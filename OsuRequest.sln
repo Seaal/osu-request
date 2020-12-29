@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30804.86
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OsuRequest.Server", "OsuRequest.Server\OsuRequest.Server.csproj", "{CEB4385B-A8DF-4E0D-BC8A-93C9137305FD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OsuRequest.OsuApi", "OsuRequest.OsuApi\OsuRequest.OsuApi.csproj", "{DD1468CA-EAFD-421C-B7F3-19D3D464D25B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{CEB4385B-A8DF-4E0D-BC8A-93C9137305FD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CEB4385B-A8DF-4E0D-BC8A-93C9137305FD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CEB4385B-A8DF-4E0D-BC8A-93C9137305FD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CEB4385B-A8DF-4E0D-BC8A-93C9137305FD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DD1468CA-EAFD-421C-B7F3-19D3D464D25B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DD1468CA-EAFD-421C-B7F3-19D3D464D25B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DD1468CA-EAFD-421C-B7F3-19D3D464D25B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DD1468CA-EAFD-421C-B7F3-19D3D464D25B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {E57C3A1F-69CD-4706-89AA-84E12296F9E9}
+	EndGlobalSection
+EndGlobal
