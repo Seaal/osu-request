@@ -1,4 +1,5 @@
-﻿using OsuRequest.OsuApi.DTOs;
+﻿using OsuRequest.CrossCutting;
+using OsuRequest.OsuApi.DTOs;
 using OsuRequest.OsuApi.Models;
 using System;
 using System.Net.Http;
@@ -12,15 +13,21 @@ namespace OsuRequest.OsuApi
     {
         private string accessToken;
 
-        private readonly HttpClient httpClient;
+        private readonly HttpClient osuHttpClient;
+        private readonly HttpClient authHttpClient;
 
         private readonly JsonSerializerOptions snakeCaseSerializerOptions;
 
         public OsuClient()
         {
-            httpClient = new HttpClient
+            osuHttpClient = new HttpClient
             {
                 BaseAddress = new Uri("https://osu.ppy.sh")
+            };
+
+            authHttpClient = new HttpClient
+            {
+                BaseAddress = new Uri("https://osurequestauth.azurewebsites.net")
             };
 
             snakeCaseSerializerOptions = new JsonSerializerOptions
@@ -31,30 +38,26 @@ namespace OsuRequest.OsuApi
 
         public async Task RequestTokenAsync(string code)
         {
-            AuthRequestDTO authRequestDto = new AuthRequestDTO()
+            OsuTokenRequestDTO osuTokenRequestDto = new OsuTokenRequestDTO()
             {
-                ClientId = 4309,
-                ClientSecret = "INSERT CLIENT SECRET HERE",
-                Code = code,
-                GrantType = "authorization_code",
-                RedirectUri = "http://localhost:61899/osu/callback"
+                Code = code
             };
 
-            HttpResponseMessage response = await httpClient.PostAsync("/oauth/token", JsonContent.Create(authRequestDto, null, snakeCaseSerializerOptions));
+            HttpResponseMessage response = await authHttpClient.PostAsync("/auth/osu/token", JsonContent.Create(osuTokenRequestDto));
 
             if (response.IsSuccessStatusCode)
             {
-                AuthResponseDTO authResponse = await response.Content.ReadFromJsonAsync<AuthResponseDTO>(snakeCaseSerializerOptions);
+                AuthResponseDTO authResponse = await response.Content.ReadFromJsonAsync<AuthResponseDTO>();
 
                 accessToken = authResponse.AccessToken;
 
-                httpClient.DefaultRequestHeaders.Add("Authorization", "Bearer " + accessToken);
+                osuHttpClient.DefaultRequestHeaders.Add("Authorization", "Bearer " + accessToken);
             }
         }
 
         public async Task<Beatmap> GetBeatmapAsync(int id)
         {
-            HttpResponseMessage response = await httpClient.GetAsync($"/api/v2/beatmaps/{id}");
+            HttpResponseMessage response = await osuHttpClient.GetAsync($"/api/v2/beatmaps/{id}");
 
             if (response.IsSuccessStatusCode)
             {

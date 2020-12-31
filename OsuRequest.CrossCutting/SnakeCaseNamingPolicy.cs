@@ -1,9 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Text;
 using System.Text.Json;
 
-namespace OsuRequest.OsuApi
+namespace OsuRequest.CrossCutting
 {
     public class SnakeCaseNamingPolicy : JsonNamingPolicy
     {
